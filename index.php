@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/config.php';
-require __DIR__ . '/layout.php';
+require __DIR__ . '/koneksi.php';
+require __DIR__ . '/tampilan.php';
 
 // Pencarian sederhana berdasarkan nama atau kode barang
 $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -30,7 +30,7 @@ render_header('Daftar Barang | Inventaris');
             </p>
         </div>
         <div>
-            <a href="create.php" class="btn btn-primary">
+            <a href="tambah.php" class="btn btn-primary">
                 + Tambah Barang
             </a>
         </div>
@@ -86,10 +86,10 @@ render_header('Daftar Barang | Inventaris');
                         <td>Rp <?= number_format((float)$row['harga'], 0, ',', '.') ?></td>
                         <td><?= htmlspecialchars($row['updated_at'] ?? $row['created_at']) ?></td>
                         <td>
-                            <a href="update.php?id=<?= (int)$row['id'] ?>" class="btn btn-outline" style="padding-inline:12px;font-size:12px;">
+                            <a href="edit.php?id=<?= (int)$row['id'] ?>" class="btn btn-outline" style="padding-inline:12px;font-size:12px;">
                                 Edit
                             </a>
-                            <a href="delete.php?id=<?= (int)$row['id'] ?>"
+                            <a href="hapus.php?id=<?= (int)$row['id'] ?>"
                                class="btn btn-danger"
                                onclick="return confirm('Yakin ingin menghapus data ini?');">
                                 Hapus
