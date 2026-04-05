@@ -1,6 +1,10 @@
 <?php
 // Fungsi helper sederhana untuk tampilan agar kode tidak berulang
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 function render_header(string $title = 'Manajemen Inventaris Barang'): void
 {
     ?>
@@ -23,6 +27,15 @@ function render_header(string $title = 'Manajemen Inventaris Barang'): void
                 </div>
             </div>
             <div>
+                <?php if (!empty($_SESSION['username'])) : ?>
+                    <span class="pill" title="Pengguna login" style="margin-right:8px;">
+                        <span class="pill-dot"></span>
+                        <span>Selamat datang, <?= htmlspecialchars((string)$_SESSION['username'], ENT_QUOTES, 'UTF-8') ?></span>
+                    </span>
+                    <a href="logout.php" class="btn btn-danger" title="Keluar" style="margin-right:8px;">
+                        Logout
+                    </a>
+                <?php endif; ?>
                 <a href="index.php" class="btn btn-icon" title="Kembali ke daftar">
                     ⟳
                 </a>
@@ -42,4 +55,3 @@ function render_footer(): void
     </html>
     <?php
 }
-

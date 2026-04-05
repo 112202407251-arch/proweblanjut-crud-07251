@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/koneksi.php';
+require_once __DIR__ . '/cek_login.php';
+require_once __DIR__ . '/koneksi.php';
 
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
     header('Location: index.php');

@@ -1,19 +1,24 @@
 <?php
-require __DIR__ . '/koneksi.php';
-require __DIR__ . '/tampilan.php';
+require_once __DIR__ . '/cek_login.php';
+require_once __DIR__ . '/koneksi.php';
+require_once __DIR__ . '/tampilan.php';
 
 // Pencarian sederhana berdasarkan nama atau kode barang
 $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
 
 if ($keyword !== '') {
+    // REVISI: Mengubah ORDER BY created_at menjadi ORDER BY id
+    // Jika nanti kode_barang menyebabkan error "Unknown column",
+    // hapus bagian "OR kode_barang LIKE :kw"
     $stmt = $pdo->prepare(
-        "SELECT * FROM barang 
-         WHERE nama_barang LIKE :kw OR kode_barang LIKE :kw 
-         ORDER BY created_at DESC"
+        "SELECT * FROM barang
+         WHERE nama_barang LIKE :kw OR kode_barang LIKE :kw
+         ORDER BY id DESC"
     );
     $stmt->execute(['kw' => '%' . $keyword . '%']);
 } else {
-    $stmt = $pdo->query("SELECT * FROM barang ORDER BY created_at DESC");
+    // REVISI: Mengubah ORDER BY created_at menjadi ORDER BY id
+    $stmt = $pdo->query("SELECT * FROM barang ORDER BY id DESC");
 }
 
 $barang = $stmt->fetchAll();
@@ -79,12 +84,12 @@ render_header('Daftar Barang | Inventaris');
                 <?php foreach ($barang as $index => $row) : ?>
                     <tr>
                         <td><?= $index + 1 ?></td>
-                        <td><span class="badge"><?= htmlspecialchars($row['kode_barang']) ?></span></td>
-                        <td><?= htmlspecialchars($row['nama_barang']) ?></td>
-                        <td><?= htmlspecialchars($row['kategori']) ?></td>
-                        <td><?= (int)$row['stok'] ?></td>
-                        <td>Rp <?= number_format((float)$row['harga'], 0, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($row['updated_at'] ?? $row['created_at']) ?></td>
+                        <td><span class="badge"><?= htmlspecialchars($row['kode_barang'] ?? '-') ?></span></td>
+                        <td><?= htmlspecialchars($row['nama_barang'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars($row['kategori'] ?? '-') ?></td>
+                        <td><?= (int)($row['stok'] ?? $row['jumlah'] ?? 0) ?></td>
+                        <td>Rp <?= number_format((float)($row['harga'] ?? 0), 0, ',', '.') ?></td>
+                        <td><?= htmlspecialchars($row['updated_at'] ?? $row['created_at'] ?? $row['tanggal_masuk'] ?? '-') ?></td>
                         <td>
                             <a href="edit.php?id=<?= (int)$row['id'] ?>" class="btn btn-outline" style="padding-inline:12px;font-size:12px;">
                                 Edit
@@ -105,4 +110,3 @@ render_header('Daftar Barang | Inventaris');
 
 <?php
 render_footer();
-
