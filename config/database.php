@@ -1,5 +1,8 @@
 <?php
-// Konfigurasi koneksi database menggunakan PDO
+/**
+ * Konfigurasi koneksi database (PDO).
+ * Dipakai oleh Model dan proses autentikasi.
+ */
 
 $dbHost = '127.0.0.1';
 $dbName = 'inventaris_sederhana';
@@ -16,4 +19,3 @@ try {
 } catch (PDOException $e) {
     die('Koneksi database gagal: ' . $e->getMessage());
 }
-

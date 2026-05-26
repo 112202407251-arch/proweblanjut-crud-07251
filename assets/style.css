@@ -1,0 +1,558 @@
+/* Variabel warna utama biar konsisten di semua komponen */
+:root {
+    --primary: #18b7be;
+    --accent: #3ed598;
+    --bg: #ffffff;
+    --text-main: #1f2933;
+    --text-muted: #6b7280;
+    --border-soft: #e5e7eb;
+    --danger: #ef4444;
+    --danger-soft: #fee2e2;
+}
+
+/* Reset dasar untuk semua elemen */
+* {
+    box-sizing: border-box;
+}
+
+/* Dasar layout halaman */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top left, rgba(24, 183, 190, 0.16), transparent 55%),
+                radial-gradient(circle at top right, rgba(62, 213, 152, 0.18), transparent 55%),
+                var(--bg);
+    color: var(--text-main);
+}
+
+.dashboard-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+}
+
+/* Layout khusus halaman login/register */
+.auth-page {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 30px;
+}
+
+.auth-card {
+    width: min(100%, 560px);
+}
+
+/* Layout dashboard utama */
+.sidebar {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(229, 231, 235, 0.8);
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Komponen branding aplikasi */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: conic-gradient(from 120deg, var(--primary), var(--accent), var(--primary));
+    box-shadow: 0 12px 24px rgba(24, 183, 190, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.brand-text-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.brand-text-sub {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: block;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    border: 1px solid rgba(24, 183, 190, 0.14);
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.nav-item:hover {
+    background: rgba(24, 183, 190, 0.08);
+    color: var(--primary);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--primary);
+    background: rgba(24, 183, 190, 0.08);
+    font-weight: 600;
+}
+
+/* Area konten utama dashboard */
+.main-content {
+    padding: 26px;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 16px;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 26px;
+}
+
+.page-subtitle {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Kartu statistik ringkasan */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.stat-card {
+    background: linear-gradient(160deg, #ffffff, #f0fffa);
+    border: 1px solid rgba(62, 213, 152, 0.35);
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);
+}
+
+.stat-label {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.stat-value {
+    margin: 8px 0 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #065f46;
+}
+
+/* Komponen card dan header card */
+.card {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.09);
+    border: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.card-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.search-input {
+    max-width: 260px;
+}
+
+.search-input input {
+    width: 100%;
+}
+
+/* Tabel data barang */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid rgba(229, 231, 235, 0.9);
+    border-radius: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 960px;
+}
+
+thead tr {
+    background: radial-gradient(circle at top left, rgba(24, 183, 190, 0.14), transparent 50%),
+                radial-gradient(circle at bottom right, rgba(62, 213, 152, 0.14), transparent 50%),
+                #f8fafc;
+}
+
+th,
+td {
+    padding: 14px;
+    font-size: 13px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.12s ease;
+}
+
+tbody tr:hover {
+    background: #f8fffc;
+}
+
+/* Badge kecil untuk highlight data */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(24, 183, 190, 0.08);
+    color: var(--primary);
+}
+
+.action-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Sistem tombol aplikasi */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #ffffff;
+    box-shadow: 0 10px 22px rgba(24, 183, 190, 0.38);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid rgba(24, 183, 190, 0.45);
+}
+
+.btn-outline:hover {
+    background: rgba(24, 183, 190, 0.06);
+}
+
+.btn-soft {
+    background: rgba(24, 183, 190, 0.1);
+    color: #0f766e;
+    border: 1px solid rgba(24, 183, 190, 0.24);
+}
+
+.btn-soft:hover {
+    background: rgba(24, 183, 190, 0.18);
+}
+
+.btn-danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-radius: 12px;
+}
+
+.btn-danger:hover {
+    background: #fecaca;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(248, 250, 252, 0.95);
+    color: var(--text-muted);
+}
+
+/* Input form dan textarea */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    font-size: 13px;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.input-group-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.input-group-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.input-group-checkbox label {
+    font-size: 13px;
+    color: var(--text-main);
+    cursor: pointer;
+    user-select: none;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    padding: 9px 14px;
+    font-size: 14px;
+    outline: none;
+    background: rgba(248, 250, 252, 0.92);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.textarea {
+    min-height: 80px;
+    border-radius: 14px;
+    resize: vertical;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px rgba(24, 183, 190, 0.6);
+    background: #ffffff;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card-form {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.card-form .card-header {
+    margin-bottom: 16px;
+}
+
+.card-form .input-row {
+    display: flex;
+    gap: 14px;
+}
+
+.card-form .input-row .input-group {
+    flex: 1;
+}
+
+/* Alert untuk pesan sukses/error */
+.alert {
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-success {
+    background: rgba(62, 213, 152, 0.08);
+    color: #166534;
+    border: 1px solid rgba(34, 197, 94, 0.5);
+}
+
+.alert-error {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 24px 10px 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Elemen kecil pendukung UI */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(24, 183, 190, 0.08);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 900px) {
+    .dashboard-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+
+    .auth-page {
+        padding: 14px;
+    }
+
+    .auth-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-content {
+        padding: 16px 12px 24px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-header,
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    th,
+    td {
+        white-space: nowrap;
+    }
+
+    .card-form .input-row {
+        flex-direction: column;
+    }
+}
+

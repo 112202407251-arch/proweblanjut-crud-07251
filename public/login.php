@@ -1,10 +1,8 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once dirname(__DIR__) . '/config/bootstrap.php';
 
 if (!empty($_SESSION['username'])) {
-    header('Location: index.php');
+    header('Location: ' . base_url('index.php'));
     exit;
 }
 
@@ -12,18 +10,17 @@ $pesan = trim($_GET['pesan'] ?? '');
 $tipe = trim($_GET['tipe'] ?? 'error');
 $tujuan = trim($_GET['tujuan'] ?? '');
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Inventaris</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login | Inventaris MVC</title>
+    <link rel="stylesheet" href="<?= asset_url('style.css') ?>">
 </head>
 <body>
-<div class="app-shell">
-    <header class="app-header">
+<div class="auth-page">
+    <div class="auth-topbar">
         <div class="brand">
             <div class="brand-logo">IN</div>
             <div>
@@ -31,10 +28,10 @@ $tujuan = trim($_GET['tujuan'] ?? '');
                 <p class="brand-text-sub">Silakan login untuk melanjutkan</p>
             </div>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <section class="card card-form">
+    <main class="auth-main">
+        <section class="card card-form auth-card">
             <div class="card-header">
                 <div>
                     <h2 class="card-title">Login</h2>
@@ -48,32 +45,19 @@ $tujuan = trim($_GET['tujuan'] ?? '');
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="proses_login.php" autocomplete="off">
+            <form method="post" action="<?= base_url('proses_login.php') ?>" autocomplete="off">
                 <input type="hidden" name="tujuan" value="<?= htmlspecialchars($tujuan, ENT_QUOTES, 'UTF-8') ?>">
 
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        class="input"
-                        placeholder="Masukkan username"
-                        required
-                        autofocus
-                    >
+                    <input type="text" id="username" name="username" class="input"
+                           placeholder="Masukkan username" required autofocus>
                 </div>
 
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="input"
-                        placeholder="Masukkan password"
-                        required
-                    >
+                    <input type="password" id="password" name="password" class="input"
+                           placeholder="Masukkan password" required>
                 </div>
 
                 <div class="input-group-checkbox">
@@ -82,7 +66,7 @@ $tujuan = trim($_GET['tujuan'] ?? '');
                 </div>
 
                 <div class="form-actions">
-                    <a href="register.php" class="btn btn-outline">Daftar</a>
+                    <a href="<?= base_url('register.php') ?>" class="btn btn-outline">Daftar</a>
                     <button type="submit" class="btn btn-primary">Masuk</button>
                 </div>
             </form>
@@ -91,4 +75,3 @@ $tujuan = trim($_GET['tujuan'] ?? '');
 </div>
 </body>
 </html>
-

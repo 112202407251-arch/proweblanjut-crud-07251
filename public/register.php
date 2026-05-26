@@ -1,10 +1,8 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once dirname(__DIR__) . '/config/bootstrap.php';
 
 if (!empty($_SESSION['username'])) {
-    header('Location: index.php');
+    header('Location: ' . base_url('index.php'));
     exit;
 }
 
@@ -12,18 +10,17 @@ $pesan = trim($_GET['pesan'] ?? '');
 $tipe = trim($_GET['tipe'] ?? 'error');
 $username = trim($_GET['username'] ?? '');
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Inventaris</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Register | Inventaris MVC</title>
+    <link rel="stylesheet" href="<?= asset_url('style.css') ?>">
 </head>
 <body>
-<div class="app-shell">
-    <header class="app-header">
+<div class="auth-page">
+    <div class="auth-topbar">
         <div class="brand">
             <div class="brand-logo">IN</div>
             <div>
@@ -32,12 +29,12 @@ $username = trim($_GET['username'] ?? '');
             </div>
         </div>
         <div>
-            <a href="login.php" class="btn btn-outline">Kembali ke Login</a>
+            <a href="<?= base_url('login.php') ?>" class="btn btn-outline">Kembali ke Login</a>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <section class="card card-form">
+    <main class="auth-main">
+        <section class="card card-form auth-card">
             <div class="card-header">
                 <div>
                     <h2 class="card-title">Register</h2>
@@ -51,44 +48,26 @@ $username = trim($_GET['username'] ?? '');
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="proses_register.php" autocomplete="off">
+            <form method="post" action="<?= base_url('proses_register.php') ?>" autocomplete="off">
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        class="input"
-                        placeholder="Contoh: firdaus_01"
-                        value="<?= htmlspecialchars($username, ENT_QUOTES, 'UTF-8') ?>"
-                        required
-                        autofocus
-                    >
+                    <input type="text" id="username" name="username" class="input"
+                           placeholder="Contoh: firdaus_01"
+                           value="<?= htmlspecialchars($username, ENT_QUOTES, 'UTF-8') ?>"
+                           required autofocus>
                     <div class="hint">Minimal 4 karakter. Disarankan hanya huruf, angka, underscore.</div>
                 </div>
 
                 <div class="input-row">
                     <div class="input-group">
                         <label for="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="input"
-                            placeholder="Minimal 6 karakter"
-                            required
-                        >
+                        <input type="password" id="password" name="password" class="input"
+                               placeholder="Minimal 6 karakter" required>
                     </div>
                     <div class="input-group">
                         <label for="password_confirm">Konfirmasi Password</label>
-                        <input
-                            type="password"
-                            id="password_confirm"
-                            name="password_confirm"
-                            class="input"
-                            placeholder="Ulangi password"
-                            required
-                        >
+                        <input type="password" id="password_confirm" name="password_confirm" class="input"
+                               placeholder="Ulangi password" required>
                     </div>
                 </div>
 
@@ -101,4 +80,3 @@ $username = trim($_GET['username'] ?? '');
 </div>
 </body>
 </html>
-
