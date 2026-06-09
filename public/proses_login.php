@@ -30,8 +30,6 @@ if ($user) {
     $hash = (string)($user['password'] ?? '');
     if ($hash !== '' && password_verify($password, $hash)) {
         $valid = true;
-    } elseif (hash_equals($hash, $password)) {
-        $valid = true;
     }
 }
 

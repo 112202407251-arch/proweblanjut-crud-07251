@@ -1,0 +1,20 @@
+# Konfigurasi lokal (kredensial database)
+config/database.local.php
+.env
+.env.*
+
+# Upload pengguna (gambar barang)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Postman lokal
+.postman/
